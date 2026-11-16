@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#070b17" />
+  <title>AURA INFINITY — Ascenda além do infinito</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game"></div>
+  <div class="vignette"></div>
+  <header class="topbar">
+    <div class="brand"><div class="brand-mark"><span>✦</span></div><div><b>AURA<span>∞</span></b><small>INFINITY REALMS</small></div></div>
+    <div class="top-center"><div class="realm-pill"><i></i> SANTUÁRIO ASTRAL <span>01</span></div></div>
+    <div class="top-actions"><button class="icon-btn" id="audioToggle" title="Silenciar música">♫</button><button class="icon-btn" id="settingsBtn" title="Configurações">⚙</button><div class="avatar-mini">✦</div></div>
+  </header>
+  <main class="hud">
+    <section class="left-panel glass">
+      <div class="section-label"><span class="live-dot"></span> SEU PROGRESSO <span class="season">TEMPORADA 01</span></div>
+      <div class="power-row"><div><small>PODER TOTAL</small><strong id="powerValue">0</strong></div><div class="power-glyph">ϟ</div></div>
+      <div class="xp-track"><div id="xpFill"></div></div><div class="xp-meta"><span id="levelText">NÍVEL 1</span><span id="xpText">0 / 100 XP</span></div>
+      <div class="stat-grid"><div class="stat-card"><span class="stat-icon cyan">✧</span><div><small>ENERGIA</small><b id="energyValue">0</b></div></div><div class="stat-card"><span class="stat-icon gold">◈</span><div><small>ESSÊNCIA</small><b id="essenceValue">0</b></div></div></div>
+      <div class="energy-header"><span>RESERVA DE ENERGIA</span><b id="energyCap">0 / 100</b></div><div class="energy-track"><div id="energyFill"></div><span></span></div>
+      <div class="rate-line"><span>GANHO POTENCIAL / SEG.</span><b>+<span id="rateValue">1</span> <em>✦</em></b></div>
+      <button class="train-btn" id="trainBtn"><span class="train-icon">✧</span><span>TREINAR AURA<small>TOQUE OU PRESSIONE [ESPAÇO]</small></span><kbd>+<i id="clickGain">1</i></kbd></button>
+      <div class="auto-row"><div class="auto-icon">⟳</div><div><b>Treino automático</b><small id="autoStatus">Desbloqueie no nível 3</small></div><button id="autoBtn" class="switch" aria-label="Treino automático"></button></div>
+    </section>
+    <section class="right-panel">
+      <div class="aura-card glass">
+        <div class="aura-card-top"><span class="section-label">AURA EQUIPADA</span><span id="rarityBadge" class="rarity-badge">COMUM</span></div>
+        <div class="equipped-info"><div class="aura-emblem" id="auraEmblem">✧</div><div><h1 id="auraName">Brasa Errante</h1><p id="auraDescription">Uma centelha desperta no vazio.</p></div></div>
+        <div class="aura-stats"><div><small>MULTIPLICADOR</small><b id="multiplierValue">×1.0</b></div><div><small>DESCOBERTAS</small><b id="discoveries">01 <i>/ 30</i></b></div></div>
+        <button id="auraBookBtn" class="outline-btn">✧ &nbsp; COLEÇÃO DE AURAS <span>→</span></button><button id="forgeBtn" class="outline-btn">◈ &nbsp; FORJA DE RESSONÂNCIA <span>↗</span></button>
+      </div>
+      <div class="quests-card glass"><div class="quest-heading"><span class="section-label">JORNADA ASTRAL</span><span class="quest-reset">DESAFIO RENOVÁVEL</span></div><div class="quest"><div class="quest-icon">✦</div><div class="quest-copy"><b>Pulso de ascensão</b><small>Conclua 25 pulsos de treino</small><div class="quest-bar"><i id="questFill"></i></div></div><strong id="questCount">0/25</strong></div><div class="quest-reward">RECOMPENSA <b id="questRewardValue">◈ 25</b></div><button id="questClaim" class="quest-claim" disabled>JORNADA EM ANDAMENTO</button></div>
+    </section>
+    <div class="bottom-center"><div class="world-hint"><span>WASD</span> MOVER <i>·</i> <span>ARRASTE</span> CÂMERA <i>·</i> <span>ESPAÇO</span> TREINAR</div></div>
+    <div class="mobile-controls"><button id="mobileTrain">✧<small>TREINAR</small></button><div class="joystick" id="joystick"><div class="stick"></div></div></div>
+    <div class="toast" id="toast"></div>
+  </main>
+  <div class="modal-backdrop" id="modalBackdrop">
+    <section class="modal glass" id="collectionModal"><div class="modal-head"><div><span class="section-label">ARQUIVO ASTRAL</span><h2>Suas auras</h2></div><button class="close-btn">×</button></div><p class="modal-sub">Descubra a energia que existe além do horizonte.</p><div class="aura-grid" id="auraGrid"></div></section>
+    <section class="modal glass settings-modal" id="settingsModal"><div class="modal-head"><div><span class="section-label">PREFERÊNCIAS</span><h2>Configurações</h2></div><button class="close-btn">×</button></div><div class="setting-row"><div><b>Música ambiente</b><small>Trilha original da aura equipada</small></div><input id="musicVolume" type="range" min="0" max="100" value="24"></div><div class="setting-row"><div><b>Qualidade visual</b><small>Controla resolução e densidade dos efeitos</small></div><select id="qualitySelect"><option value="high">Alta</option><option value="medium">Média</option><option value="low">Baixa</option></select></div><button class="outline-btn" id="resetBtn">REINICIAR PROGRESSO <span>↻</span></button></section>
+    <section class="modal glass settings-modal" id="forgeModal"><div class="modal-head"><div><span class="section-label">APRIMORAMENTO PERMANENTE</span><h2>Forja de ressonância</h2></div><button class="close-btn">×</button></div><p class="modal-sub">Converta essência em poder. Cada nível aumenta em 10% o ganho base de treino.</p><div class="forge-stats"><div><small>RESSONÂNCIA</small><b id="forgeRank">NÍVEL 0 / 20</b></div><div><small>BÔNUS ATUAL</small><b id="forgeBonus">+0% de ganho base</b></div><div><small>ESSÊNCIA DISPONÍVEL</small><b id="forgeBalance">0</b></div></div><button class="outline-btn forge-buy" id="forgeBuy">APRIMORAR</button></section>
+  </div>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
