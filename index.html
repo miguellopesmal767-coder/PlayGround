@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#171411" />
+  <title>IRON DUST — Sobreviva ao deserto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="game-root">
+    <canvas id="scene"></canvas>
+    <div class="grain"></div><div class="vignette"></div>
+    <header class="topbar" id="topbar">
+      <button class="brand-mark" id="homeButton" aria-label="Voltar ao hangar"><span class="brand-emblem">✳</span><span>IRON<span class="brand-light">DUST</span><small>FRONTEIRA DAS CINZAS</small></span></button>
+      <div class="top-meta"><span class="online-dot"></span><span>SETOR 07 <i> / </i> DESERTO DE VIDRO</span><span class="top-separator"></span><span id="topWeather">36° <b>•</b> VENTO LESTE</span></div>
+      <div class="top-right"><span class="scrap-chip">⬡ <b id="scrapCount">0</b> <small>FERRO</small></span><button class="icon-button" id="soundButton" aria-label="Som">♫</button></div>
+    </header>
+    <main id="menuScreen" class="screen menu-screen">
+      <div class="menu-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> UM JOGO DE SOBREVIVÊNCIA VEICULAR</p>
+        <h1>O DESERTO<br><span>NÃO</span> PERDOA<span class="title-period">.</span></h1>
+        <p class="menu-description">O motor ainda ronca. A munição está acabando.<br>Faça cada quilômetro valer.</p>
+        <div class="menu-actions"><button class="primary-button" id="startButton"><span>INICIAR EXPEDIÇÃO</span><b>↗</b></button><button class="secondary-button" id="garageButton">GARAGEM <span>↗</span></button></div>
+        <div class="menu-foot"><span>01 — 04</span><span class="foot-rule"></span><span>UMA ÚLTIMA CORRIDA</span></div>
+      </div>
+      <div class="menu-side-note"><span>ARQUIVO 07.04</span><span>“OS MORTOS NÃO<br>PRECISAM DE GASOLINA.”</span></div>
+      <div class="map-stamp"><span>MAPA DA REGIÃO</span><b>DESERTO<br>DE VIDRO</b><i>⊕  34° 08' S — 67° 42' O</i></div>
+      <div class="carousel-controls"><button id="prevMap" aria-label="Mapa anterior">←</button><span><b id="mapName">MAR DE FERRUGEM</b><small id="mapIndex">01 / 04</small></span><button id="nextMap" aria-label="Próximo mapa">→</button></div>
+      <button class="garage-shortcut" id="garageShortcut"><span>▤</span> SUA GARAGEM <b>→</b></button>
+    </main>
+    <section id="garageScreen" class="screen garage-screen hidden">
+      <div class="garage-heading"><div><p class="eyebrow"><span class="eyebrow-line"></span> OFICINA DE CAMPO · SETOR 07</p><h2>SEU <span>FERRO</span>.<br>SUAS REGRAS.</h2></div><button class="close-button" id="garageClose">× <span>VOLTAR</span></button></div>
+      <div class="garage-layout"><div class="vehicle-panel"><div class="vehicle-topline"><span>FROTA DISPONÍVEL</span><span id="vehicleCounter">01 / 05</span></div><div id="vehiclePreview" class="vehicle-preview"><div class="preview-glow"></div><div class="vehicle-silhouette">▰</div><span class="preview-label">VEÍCULO SELECIONADO</span></div><div class="vehicle-select"><button id="vehiclePrev">←</button><div><h3 id="vehicleName">Caminhão Blindado</h3><p id="vehicleDesc">Um casco robusto feito para aguentar o fim do mundo.</p></div><button id="vehicleNext">→</button></div><div class="vehicle-stats" id="vehicleStats"></div><button id="selectVehicle" class="primary-button garage-action"><span>SELECIONAR VEÍCULO</span><b>↗</b></button></div>
+      <div class="upgrade-panel"><div class="panel-title"><div><span class="section-kicker">MELHORIAS PERMANENTES</span><h3>OFICINA <span>01</span></h3></div><span class="metal-badge">⬡ <b id="garageScrap">0</b> FERRO</span></div><p class="upgrade-intro">Invista o ferro da expedição. Cada melhoria fica para sempre.</p><div id="upgradeList" class="upgrade-list"></div><div class="garage-note"><span>✦</span> Sua jornada começa onde a última terminou.</div></div></div>
+    </section>
+    <section id="gameHud" class="game-hud hidden">
+      <div class="hud-top-left"><div class="run-mark"><span>✳</span><div>IRON DUST<small>EXPEDIÇÃO ATIVA</small></div></div><div class="objective"><small>OBJETIVO</small><b id="objectiveText">SOBREVIVA À HORDA</b></div></div>
+      <div class="hud-top-center"><div class="timer-box"><small>TEMPO DE SOBREVIVÊNCIA</small><b id="timerText">10:00</b></div><div class="wave-box"><span>ONDA</span><b id="waveText">01</b></div></div>
+      <div class="hud-top-right"><button id="pauseButton" class="pause-button">Ⅱ <span>PAUSAR</span></button><div class="map-mini"><span>SETOR 07</span><b>⟡</b></div></div>
+      <div class="hud-bottom-left"><div class="health-row"><span>INTEGRIDADE</span><b id="healthText">100%</b></div><div class="health-track"><i id="healthFill"></i><span></span></div><div class="xp-row"><span>NÍVEL <b id="levelText">01</b></span><span id="xpText">0 / 100 SUCATA</span></div><div class="xp-track"><i id="xpFill"></i></div></div>
+      <div class="weapon-bar" id="weaponBar"><span class="weapon-caption">SISTEMAS DE ARMAS</span></div>
+      <div id="bossHud" class="boss-hud hidden"><div class="boss-warning">⚠ <span>AMEAÇA DE ALTO NÍVEL</span> ⚠</div><div class="boss-name"><b>O COLOSSO</b><small>VEÍCULO DE CERCO · CLASSE TITÃ</small></div><div class="boss-track"><i id="bossFill"></i></div><div class="boss-status" id="bossStatus">PREPARANDO DISPARO</div></div>
+      <div class="speedometer"><div class="speed-number"><b id="speedText">00</b><span>KM/H</span></div><div class="speed-lines"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><small>VELOCIDADE</small></div>
+      <div class="mobile-controls" id="mobileControls"><div id="joystick" class="joystick"><div class="joy-ring"><span class="joy-cross">+</span><i id="joyKnob"></i></div><small>DIRIGIR</small></div><div class="mobile-buttons"><button id="driftButton" class="control-button drift-control"><span>〰</span><b>DRIFT</b></button><button id="abilityButton" class="control-button ability-control"><span>✳</span><b>ESPECIAL</b><i id="abilityCharge"></i></button></div></div>
+      <div id="tutorialToast" class="tutorial-toast hidden"><span>⟶</span><div><b>APRENDA NA ESTRADA</b><small>Use WASD ou o joystick para dirigir</small></div><button id="skipTutorial">PULAR</button></div>
+      <div class="edge-threats" id="edgeThreats"></div>
+      <div id="toast" class="game-toast hidden"></div>
+    </section>
+    <div id="overlay" class="overlay hidden"><div class="overlay-card" id="overlayCard"></div></div>
+    <section id="upgradeScreen" class="upgrade-screen hidden"><div class="upgrade-heading"><span>⟡  SUCATA RECUPERADA</span><small>ESCOLHA UMA MELHORIA</small><h2>SUBIU DE <i>NÍVEL</i></h2></div><div id="upgradeCards" class="upgrade-cards"></div><div class="upgrade-footer">SELECIONE UMA CARTA PARA CONTINUAR <span>⟶</span></div></section>
+    <div id="damageFlash"></div>
+    <div id="bossAnnounce" class="boss-announce hidden"><span>⚠ ALERTA DE CERCO ⚠</span><b>O COLOSSO<br><i>ESTÁ A CAMINHO</i></b><small>ASSINATURA DE MOTOR DETECTADA · 5 KM</small></div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
