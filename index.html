@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#071b26">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='54'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+<title>SUPER LEAGUE — Aurora Cup</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800;900&display=swap');
+:root{color-scheme:dark;--ink:#f4f6e9;--muted:#a9c1bd;--lime:#d8ff69;--cyan:#54e7d2;--panel:rgba(7,25,34,.78)}
+*{box-sizing:border-box}html,body{height:100%;margin:0;overflow:hidden;background:#071b26;color:var(--ink);font-family:Manrope,system-ui,sans-serif;touch-action:none}body{display:grid;place-items:center}.shell{position:relative;width:min(100vw,160vh);height:min(100vh,62.5vw);min-height:320px;overflow:hidden;background:#0a2b35;box-shadow:0 20px 90px #0008}canvas{display:block;width:100%;height:100%}.topbar{position:absolute;z-index:3;top:3.3%;left:4%;right:4%;display:flex;align-items:flex-start;justify-content:space-between;pointer-events:none}.brand{display:flex;align-items:center;gap:11px;font-size:12px;font-weight:900;letter-spacing:.16em}.brand-mark{width:29px;height:29px;border:1px solid #d8ff69;border-radius:50%;display:grid;place-items:center;color:#d8ff69;font-size:14px;box-shadow:0 0 20px #d8ff6944}.brand small{display:block;color:#9eb8b3;font:9px 'DM Mono',monospace;letter-spacing:.18em;margin-top:3px}.hud{display:flex;align-items:center;gap:10px}.hud-box{background:rgba(5,23,31,.7);border:1px solid #ffffff20;border-radius:10px;padding:8px 13px;min-width:78px;text-align:center;backdrop-filter:blur(8px)}.hud-box small{display:block;color:#9eb8b3;font:9px 'DM Mono',monospace;letter-spacing:.13em}.hud-box strong{font:700 19px 'DM Mono',monospace;line-height:1.2}.score strong{color:var(--lime)}.clock strong{color:#fff}.wind-box{min-width:100px}.wind-label{color:var(--cyan)!important}.wind-meter{height:3px;border-radius:3px;background:#ffffff1a;margin-top:6px;position:relative;overflow:hidden}.wind-meter i{position:absolute;top:0;bottom:0;width:50%;background:var(--cyan);border-radius:3px;transition:transform .2s}.overlay{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,rgba(3,19,26,.76),rgba(3,19,26,.23) 75%);padding:6%}.card{width:min(540px,90%);margin-right:auto}.eyebrow{display:flex;align-items:center;gap:10px;color:var(--lime);font:11px 'DM Mono',monospace;letter-spacing:.2em;text-transform:uppercase}.eyebrow:before{content:'';width:24px;height:1px;background:var(--lime)}h1{font-size:clamp(38px,6.6vw,80px);line-height:.91;letter-spacing:-.075em;margin:19px 0 16px;font-weight:900;text-transform:uppercase}h1 span{display:block;color:var(--lime)}.intro{max-width:400px;color:#c1d2cc;font-size:14px;line-height:1.7;margin-bottom:24px}.challenge{display:flex;gap:0;margin:20px 0 27px;border-top:1px solid #ffffff27;border-bottom:1px solid #ffffff27;padding:13px 0}.challenge div{padding:0 19px;border-left:1px solid #ffffff22}.challenge div:first-child{padding-left:0;border-left:0}.challenge b{display:block;color:#fff;font-size:15px}.challenge small{font:9px 'DM Mono',monospace;letter-spacing:.12em;color:#9eb8b3}.btn{border:0;border-radius:7px;background:var(--lime);color:#13231d;padding:15px 22px;font:900 12px Manrope,sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;box-shadow:0 5px 25px #d8ff6930;transition:transform .15s,filter .15s}.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}.btn .arrow{font-size:16px;margin-left:19px}.tip{font:10px 'DM Mono',monospace;color:#a8c1bc;margin-left:15px}.controls-help{position:absolute;z-index:3;bottom:3.8%;left:4%;display:flex;align-items:center;gap:8px;color:#d7e4dc;font:10px 'DM Mono',monospace;pointer-events:none}.key{border:1px solid #ffffff42;border-radius:4px;padding:4px 6px;background:#05202a99;color:#e3f0e9}.help-sep{height:18px;width:1px;background:#ffffff30;margin:0 8px}.wind-callout{position:absolute;z-index:3;right:4%;bottom:4%;color:#bee8dc;text-align:right;font:10px 'DM Mono',monospace;letter-spacing:.05em;pointer-events:none}.wind-callout b{display:block;color:var(--cyan);font-size:12px;margin-bottom:4px}.message{position:absolute;z-index:4;top:17%;left:50%;transform:translate(-50%,-10px);opacity:0;transition:.3s;background:#071b26e8;border:1px solid #d8ff6970;padding:10px 19px;border-radius:6px;color:var(--lime);font:11px 'DM Mono',monospace;letter-spacing:.15em;pointer-events:none;white-space:nowrap}.message.show{opacity:1;transform:translate(-50%,0)}.touch-controls{display:none;position:absolute;z-index:4;bottom:5%;left:4%;right:4%;justify-content:space-between;align-items:flex-end;pointer-events:none}.dpad{display:grid;grid-template-columns:repeat(3,43px);grid-template-rows:repeat(2,39px);gap:3px;pointer-events:auto}.touch-btn{background:#071b26b8;border:1px solid #ffffff35;color:#f2f4e9;border-radius:8px;font-size:17px;display:grid;place-items:center;touch-action:none;user-select:none}.touch-btn.active{background:#d8ff6944;border-color:#d8ff69}.pad-up{grid-column:2}.pad-left{grid-column:1;grid-row:2}.pad-down{grid-column:2;grid-row:2}.pad-right{grid-column:3;grid-row:2}.shoot-btn{width:74px;height:74px;border-radius:50%;background:#d8ff69;color:#12241a;border:3px solid #efffb3;font-size:11px;font-weight:900;letter-spacing:.1em;box-shadow:0 0 25px #d8ff6944;pointer-events:auto;touch-action:none;user-select:none}.shoot-btn.charging{transform:scale(.94);box-shadow:0 0 38px #d8ff69}.aim-note{position:absolute;z-index:3;top:14%;left:50%;transform:translateX(-50%);font:10px 'DM Mono',monospace;color:#b9d1c9;background:#071b26aa;padding:7px 12px;border-radius:20px;opacity:0;transition:opacity .3s;pointer-events:none}.aim-note.show{opacity:1}.hidden{display:none!important}
+@media(max-width:700px){.shell{width:100vw;height:100dvh;min-height:0}.topbar{top:max(12px,env(safe-area-inset-top));left:15px;right:15px}.brand{font-size:10px;gap:7px}.brand>div:last-child{display:none}.brand-mark{width:25px;height:25px}.hud{gap:5px;margin-left:auto}.hud-box{padding:6px 8px;min-width:54px}.hud-box strong{font-size:16px}.hud-box small{font-size:7px}.score{min-width:76px}.clock{min-width:52px}.wind-box{min-width:75px}.overlay{align-items:flex-start;padding:21vh 7% 0;background:linear-gradient(180deg,rgba(3,19,26,.65),rgba(3,19,26,.15) 70%)}.card{width:100%;margin:0}h1{font-size:clamp(44px,13vw,68px);margin:14px 0}.intro{font-size:12px;line-height:1.55;max-width:340px;margin-bottom:13px}.challenge{margin:12px 0 16px;padding:9px 0}.challenge b{font-size:13px}.challenge small{font-size:8px}.btn{padding:13px 16px}.tip{display:none}.controls-help{display:none}.wind-callout{display:none}.touch-controls{display:flex;bottom:max(15px,env(safe-area-inset-bottom))}.aim-note{top:12%;font-size:9px}.message{top:19%}}
+@media(max-height:500px) and (min-width:701px){.overlay{padding:3% 6%}.card{transform:scale(.84);transform-origin:left center}.topbar{top:2%}.controls-help,.wind-callout{bottom:2%}}
+</style>
+</head>
+<body>
+<main class="shell" id="shell">
+<canvas id="game" aria-label="Aurora Cup soccer game"></canvas>
+<div class="topbar">
+  <div class="brand"><div class="brand-mark">✦</div><div>SUPER LEAGUE<small>AURORA CUP · NORTHERN DIVISION</small></div></div>
+  <div class="hud hidden" id="hud">
+    <div class="hud-box score"><small>GOALS</small><strong id="score">00 / 03</strong></div>
+    <div class="hud-box clock"><small>TIME</small><strong id="time">60</strong></div>
+    <div class="hud-box wind-box"><small class="wind-label" id="windText">↗ WIND</small><div class="wind-meter"><i id="windMeter"></i></div></div>
+  </div>
+</div>
+<div class="overlay" id="overlay">
+  <div class="card">
+    <div class="eyebrow" id="eyebrow">EXHIBITION · LEVEL 01</div>
+    <h1 id="title">Chase the<span>aurora.</span></h1>
+    <p class="intro" id="intro">The storm is rolling over the pitch. Bend your shots through the shifting wind, outfox the keeper, and earn your place in the Super League.</p>
+    <div class="challenge"><div><b>03</b><small>GOALS TO WIN</small></div><div><b>60<span style="font-size:10px;color:#a9c1bd"> SEC</span></b><small>ON THE CLOCK</small></div><div><b>✦</b><small>CURVE SHOTS</small></div></div>
+    <button class="btn" id="startBtn">Kick off <span class="arrow">↗</span></button><span class="tip">A · D MOVE &nbsp; / &nbsp; HOLD SPACE TO CHARGE</span>
+  </div>
+</div>
+<div class="controls-help" id="controlsHelp"><span class="key">A</span><span class="key">D</span> MOVE <span class="help-sep"></span><span class="key">CLICK</span> AIM <span class="help-sep"></span><span class="key">HOLD SPACE</span> CHARGE &nbsp;·&nbsp; RELEASE TO SHOOT</div>
+<div class="wind-callout"><b>✦ AERO CURVE</b>CHARGE A SHOT TO RIDE THE CROSSWIND</div>
+<div class="message" id="message">GOAL!</div>
+<div class="aim-note" id="aimNote">TAP THE FIELD TO SET YOUR SHOT</div>
+<div class="touch-controls hidden" id="touchControls">
+  <div class="dpad">
+    <div class="touch-btn pad-up" data-dir="up">↑</div><div class="touch-btn pad-left" data-dir="left">←</div><div class="touch-btn pad-down" data-dir="down">↓</div><div class="touch-btn pad-right" data-dir="right">→</div>
+  </div>
+  <button class="shoot-btn" id="shootBtn">HOLD<br>SHOT</button>
+</div>
+</main>
+<script>
+(()=>{
+const canvas=document.getElementById('game'),ctx=canvas.getContext('2d'),shell=document.getElementById('shell');
+const overlay=document.getElementById('overlay'),startBtn=document.getElementById('startBtn'),hud=document.getElementById('hud');
+const scoreEl=document.getElementById('score'),timeEl=document.getElementById('time'),windText=document.getElementById('windText'),windMeter=document.getElementById('windMeter'),message=document.getElementById('message'),aimNote=document.getElementById('aimNote');
+const W=1000,H=650,keys={},touch={up:false,down:false,left:false,right:false};let dpr=1,viewScale=1,viewX=0,viewY=0,state='menu',last=0,elapsed=0,score=0,timeLeft=60,charge=0,charging=false,shotCooldown=0,aim={x:915,y:325},mouse={x:915,y:325},showAim=true,noticeTimer=0,particles=[],crowd=[],goalFlash=0;
+const player={x:175,y:325,vx:0,vy:0,r:17};const ball={x:215,y:325,vx:0,vy:0,r:8,spin:0,active:false,trails:[]};const keeper={x:870,y:325,vy:0};const blockers=[{x:715,y:275,phase:0},{x:785,y:380,phase:2.7}];
+function resize(){const rect=shell.getBoundingClientRect();dpr=Math.min(2,window.devicePixelRatio||1);canvas.width=Math.round(rect.width*dpr);canvas.height=Math.round(rect.height*dpr);viewScale=Math.min(canvas.width/W,canvas.height/H);viewX=(canvas.width-W*viewScale)/2;viewY=(canvas.height-H*viewScale)/2;ctx.setTransform(viewScale,0,0,viewScale,viewX,viewY)}window.addEventListener('resize',resize);resize();
+for(let i=0;i<130;i++)crowd.push({x:Math.random()*W,y:Math.random()*135,r:Math.random()*1.7+.5,c:['#c3d6c6','#62b9a2','#f0cf75','#d7eff0'][i%4],p:Math.random()*8});
+function wind(){return Math.sin(elapsed*.72)*.85+Math.sin(elapsed*1.41)*.15}
+function start(){state='playing';overlay.classList.add('hidden');hud.classList.remove('hidden');document.getElementById('controlsHelp').classList.remove('hidden');document.getElementById('touchControls').classList.remove('hidden');elapsed=0;score=0;timeLeft=60;charge=0;charging=false;ball.active=false;ball.trails=[];player.x=175;player.y=325;aim={x:915,y:325};updateHud();aimNote.classList.add('show');setTimeout(()=>aimNote.classList.remove('show'),3500)}
+startBtn.addEventListener('click',start);
+function finish(win){state=win?'won':'lost';overlay.classList.remove('hidden');hud.classList.add('hidden');document.getElementById('controlsHelp').classList.add('hidden');document.getElementById('touchControls').classList.add('hidden');document.getElementById('eyebrow').textContent=win?'AURORA CUP · CHAMPION':'AURORA CUP · FINAL WHISTLE';document.getElementById('title').innerHTML=win?'League<span>legend.</span>':'Time<span>is up.</span>';document.getElementById('intro').textContent=win?'Three goals, one impossible storm. You bent the Aurora Cup to your will. The league is yours.':`You found the net ${score} time${score===1?'':'s'} in the Aurora Gauntlet. The keeper lives to see another day — run it back?`;startBtn.innerHTML=(win?'Play again':'Rematch')+' <span class="arrow">↗</span>';document.querySelector('.challenge').innerHTML=`<div><b>${String(score).padStart(2,'0')}</b><small>GOALS SCORED</small></div><div><b>${win?'🏆':'↻'}</b><small>${win?'CUP WINNER':'ONE MORE RUN'}</small></div><div><b>✦</b><small>AURORA CUP</small></div>`}
+function updateHud(){scoreEl.textContent=`${String(score).padStart(2,'0')} / 03`;timeEl.textContent=Math.max(0,Math.ceil(timeLeft));timeEl.style.color=timeLeft<10?'#ff8b79':'#fff';const w=wind();windText.textContent=(w>0?'↗':'↙')+' WIND';windMeter.style.transform=`translateX(${w*50}%)`;windMeter.style.background=w>0?'#54e7d2':'#ffce70'}
+function setAim(clientX,clientY){const r=canvas.getBoundingClientRect();aim.x=((clientX-r.left)*dpr-viewX)/viewScale;aim.y=((clientY-r.top)*dpr-viewY)/viewScale;aim.x=Math.max(600,Math.min(960,aim.x));aim.y=Math.max(230,Math.min(420,aim.y));showAim=true}
+canvas.addEventListener('pointermove',e=>{if(e.pointerType==='mouse'&&state==='playing'){setAim(e.clientX,e.clientY)}});
+canvas.addEventListener('pointerdown',e=>{if(state==='playing'){setAim(e.clientX,e.clientY);showAim=true}});
+window.addEventListener('keydown',e=>{const k=e.key.toLowerCase();if([' ','arrowup','arrowdown','arrowleft','arrowright'].includes(k))e.preventDefault();keys[k]=true;if(k===' '&&!charging&&state==='playing'){charging=true;charge=0}});
+window.addEventListener('keyup',e=>{const k=e.key.toLowerCase();keys[k]=false;if(k===' '&&charging){releaseShot()}});
+function pressShoot(e){e.preventDefault();if(state!=='playing')return;if(!charging){charging=true;charge=0;document.getElementById('shootBtn').classList.add('charging')}}function releaseShoot(e){if(e)e.preventDefault();if(charging){releaseShot();document.getElementById('shootBtn').classList.remove('charging')}}
+const shootBtn=document.getElementById('shootBtn');shootBtn.addEventListener('pointerdown',pressShoot);shootBtn.addEventListener('pointerup',releaseShoot);shootBtn.addEventListener('pointercancel',releaseShoot);shootBtn.addEventListener('pointerleave',e=>{if(e.buttons)releaseShoot(e)});
+document.querySelectorAll('[data-dir]').forEach(el=>{const dir=el.dataset.dir;const down=e=>{e.preventDefault();touch[dir]=true;el.classList.add('active')},up=e=>{e.preventDefault();touch[dir]=false;el.classList.remove('active')};el.addEventListener('pointerdown',down);el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);el.addEventListener('pointerleave',up)});
+function releaseShot(){charging=false;if(state!=='playing'||ball.active)return;const dist=Math.hypot(player.x-ball.x,player.y-ball.y);if(dist>82){flash('GET CLOSER TO THE BALL');return}const dx=aim.x-ball.x,dy=aim.y-ball.y,len=Math.hypot(dx,dy)||1;const power=.52+Math.min(1,charge/1.35)*.48;ball.vx=dx/len*(500+power*250);ball.vy=dy/len*(500+power*250);ball.spin=wind()*(.65+power*.85);ball.active=true;shotCooldown=0;ball.trails=[];flash(charge>1.05?'MAX CURVE!':'SHOT AWAY!')}
+function flash(text){message.textContent=text;message.classList.add('show');noticeTimer=1.1}
+function resetBall(){ball.active=false;ball.vx=ball.vy=0;ball.x=player.x+37;ball.y=player.y+8;ball.trails=[];charge=0;charging=false}
+function update(dt){if(state!=='playing')return;elapsed+=dt;timeLeft-=dt;shotCooldown=Math.max(0,shotCooldown-dt);if(noticeTimer>0){noticeTimer-=dt;if(noticeTimer<=0)message.classList.remove('show')}
+const ix=(keys.d||keys.arrowright||touch.right?1:0)-(keys.a||keys.arrowleft||touch.left?1:0),iy=(keys.s||keys.arrowdown||touch.down?1:0)-(keys.w||keys.arrowup||touch.up?1:0);const m=Math.hypot(ix,iy)||1;player.vx=ix/m*250;player.vy=iy/m*250;player.x=Math.max(105,Math.min(810,player.x+player.vx*dt));player.y=Math.max(175,Math.min(490,player.y+player.vy*dt));
+if(!ball.active){ball.x=player.x+35;ball.y=player.y+8+Math.sin(elapsed*5)*1.5;if(charging)charge=Math.min(1.5,charge+dt)}else{ball.trails.unshift({x:ball.x,y:ball.y,a:1});if(ball.trails.length>9)ball.trails.pop();ball.vy+=ball.spin*240*dt;ball.x+=ball.vx*dt;ball.y+=ball.vy*dt;ball.vx*=Math.pow(.995,dt*60);ball.vy*=Math.pow(.995,dt*60);ball.spin*=Math.pow(.992,dt*60);
+// defenders drift across shooting lanes; the keeper reacts, but never instantly.
+for(const b of blockers){const by=b.y+Math.sin(elapsed*1.45+b.phase)*105;if(Math.hypot(ball.x-b.x,ball.y-by)<27){flash('DEFLECTED! FIND A GAP');resetBall();break}}
+if(ball.active&&ball.x>keeper.x-10&&ball.x<keeper.x+17&&Math.abs(ball.y-keeper.y)<43){flash('THE KEEPER SAVES!');resetBall()}
+if(ball.active&&ball.x>=891){if(ball.y>246&&ball.y<404){score++;goalFlash=.75;flash('GOAL! AURORA!',);particles=[];for(let i=0;i<50;i++)particles.push({x:ball.x,y:ball.y,vx:(Math.random()-.5)*250,vy:(Math.random()-.7)*250,life:1,c:['#d8ff69','#54e7d2','#ffffff'][i%3]});if(score>=3){finish(true);return}player.x=175;player.y=325+(Math.random()-.5)*90;resetBall()}else{flash('WIDE! RESETTING');resetBall()}}
+if(ball.active&&(ball.x>975||ball.y<145||ball.y>515||Math.abs(ball.vx)+Math.abs(ball.vy)<125)){resetBall()}}
+const target=ball.active?Math.max(260,Math.min(410,ball.y+ball.vy*.14)):325+Math.sin(elapsed*.9)*38;keeper.vy+=(target-keeper.y)*dt*3.1;keeper.vy*=Math.pow(.08,dt);keeper.y=Math.max(270,Math.min(380,keeper.y+keeper.vy*dt));
+for(const p of particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=240*dt;p.life-=dt}particles=particles.filter(p=>p.life>0);goalFlash=Math.max(0,goalFlash-dt);if(Math.floor(timeLeft)!==Math.floor(timeLeft+dt))updateHud();if(timeLeft<=0)finish(false)}
+function roundRect(x,y,w,h,r,fill,stroke){ctx.beginPath();ctx.roundRect(x,y,w,h,r);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.stroke()}}
+function draw(){ctx.clearRect(0,0,W,H);const sky=ctx.createLinearGradient(0,0,0,H);sky.addColorStop(0,'#102e38');sky.addColorStop(.4,'#0c2731');sky.addColorStop(1,'#09242d');ctx.fillStyle=sky;ctx.fillRect(0,0,W,H);
+// stadium bowl and scattered lights
+ctx.fillStyle='#132f39';ctx.fillRect(0,0,W,150);ctx.fillStyle='#173944';ctx.fillRect(0,122,W,20);ctx.fillStyle='#1b4148';ctx.fillRect(0,141,W,10);for(const c of crowd){const blink=.65+.35*Math.sin(elapsed*2+c.p);ctx.globalAlpha=blink;ctx.fillStyle=c.c;ctx.beginPath();ctx.arc(c.x,c.y+Math.sin(elapsed+c.p)*1.5,c.r,0,Math.PI*2);ctx.fill()}ctx.globalAlpha=1;
+// aurora bands
+ctx.save();ctx.globalAlpha=.12;for(let j=0;j<3;j++){ctx.beginPath();ctx.moveTo(-20,110+j*18);for(let x=0;x<=W+20;x+=20)ctx.lineTo(x,105+j*18+Math.sin(x*.008+elapsed*.45+j)*18);ctx.lineTo(W,150);ctx.lineTo(0,150);ctx.closePath();ctx.fillStyle=j%2?'#54e7d2':'#c6ff8b';ctx.fill()}ctx.restore();
+// floodlights
+for(const x of [115,500,885]){ctx.fillStyle='#d5fff1';ctx.globalAlpha=.7;for(let i=0;i<4;i++){ctx.beginPath();ctx.arc(x+i*7,48,1.8,0,Math.PI*2);ctx.fill()}ctx.globalAlpha=1;const g=ctx.createRadialGradient(x+10,60,5,x+10,210,210);g.addColorStop(0,'#b5ffdf0c');g.addColorStop(1,'#b5ffdf00');ctx.fillStyle=g;ctx.fillRect(x-180,60,380,230)}
+// pitch
+const grass=ctx.createLinearGradient(0,150,0,600);grass.addColorStop(0,'#17604e');grass.addColorStop(.5,'#155746');grass.addColorStop(1,'#104b43');ctx.fillStyle=grass;ctx.fillRect(30,150,940,450);for(let i=0;i<10;i++){ctx.fillStyle=i%2?'#ffffff05':'#001a1507';ctx.fillRect(30+i*94,150,94,450)}
+ctx.strokeStyle='#d8f4dc7b';ctx.lineWidth=2;ctx.strokeRect(51,171,898,408);ctx.beginPath();ctx.moveTo(500,171);ctx.lineTo(500,579);ctx.stroke();ctx.beginPath();ctx.arc(500,375,65,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#d8f4dc';ctx.beginPath();ctx.arc(500,375,3,0,Math.PI*2);ctx.fill();ctx.strokeRect(51,260,125,230);ctx.strokeRect(51,305,53,140);ctx.strokeRect(824,260,125,230);ctx.strokeRect(896,305,53,140);ctx.beginPath();ctx.arc(824,375,3,0,Math.PI*2);ctx.arc(176,375,3,0,Math.PI*2);ctx.fill();
+// goal cage at right
+ctx.fillStyle='#d8ff6910';ctx.fillRect(947,305,25,140);ctx.strokeStyle='#e7fff0';ctx.lineWidth=4;ctx.strokeRect(947,305,22,140);ctx.strokeStyle='#d7fff077';ctx.lineWidth=1;for(let y=315;y<445;y+=14){ctx.beginPath();ctx.moveTo(949,y);ctx.lineTo(968,y);ctx.stroke()}for(let x=953;x<969;x+=7){ctx.beginPath();ctx.moveTo(x,307);ctx.lineTo(x,443);ctx.stroke()}
+// gust trails on pitch
+const w=wind();ctx.save();ctx.strokeStyle=w>0?'#8cf8df2b':'#f8e39425';ctx.lineWidth=2;for(let i=0;i<7;i++){const y=205+i*49,x=350+((elapsed*38+i*121)%530);ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+(w>0?30:-30),y-w*13);ctx.stroke();ctx.beginPath();ctx.moveTo(x+(w>0?30:-30),y-w*13);ctx.lineTo(x+(w>0?21:-21),y-w*13-5);ctx.stroke()}ctx.restore();
+// moving rival defenders
+for(let i=0;i<blockers.length;i++){const b=blockers[i],y=b.y+Math.sin(elapsed*1.45+b.phase)*105;drawPlayer(b.x,y,'#f57868','◆',true)}
+// keeper
+ctx.save();ctx.shadowColor='#54e7d2';ctx.shadowBlur=18;drawPlayer(keeper.x,keeper.y,'#53e4d0','✦',true);ctx.restore();
+// player shadow and player
+ctx.fillStyle='#001a1780';ctx.beginPath();ctx.ellipse(player.x,player.y+15,19,7,0,0,Math.PI*2);ctx.fill();ctx.save();ctx.shadowColor='#d8ff69';ctx.shadowBlur=16;drawPlayer(player.x,player.y,'#d8ff69','',false);ctx.restore();
+// aim line
+if(state==='playing'&&!ball.active){const dx=aim.x-ball.x,dy=aim.y-ball.y,l=Math.hypot(dx,dy)||1;ctx.save();ctx.setLineDash([6,7]);ctx.strokeStyle='rgba(232,255,207,.4)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(ball.x,ball.y);ctx.lineTo(ball.x+dx/l*120,ball.y+dy/l*120);ctx.stroke();ctx.setLineDash([]);ctx.strokeStyle='#d8ff69';ctx.beginPath();ctx.arc(aim.x,aim.y,8,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.moveTo(aim.x-12,aim.y);ctx.lineTo(aim.x+12,aim.y);ctx.moveTo(aim.x,aim.y-12);ctx.lineTo(aim.x,aim.y+12);ctx.stroke();ctx.restore()}
+// shot trail
+for(let i=ball.trails.length-1;i>=0;i--){const t=ball.trails[i];ctx.globalAlpha=(1-i/ball.trails.length)*.35;ctx.fillStyle='#d8ff69';ctx.beginPath();ctx.arc(t.x,t.y,ball.r*(1-i/ball.trails.length),0,Math.PI*2);ctx.fill()}ctx.globalAlpha=1;
+// ball
+ctx.save();if(ball.active){ctx.shadowColor='#d8ff69';ctx.shadowBlur=22}ctx.fillStyle='#f6f7e9';ctx.beginPath();ctx.arc(ball.x,ball.y,ball.r,0,Math.PI*2);ctx.fill();ctx.fillStyle='#284942';ctx.beginPath();ctx.arc(ball.x-2,ball.y-2,2.4,0,Math.PI*2);ctx.fill();ctx.restore();
+// charge ring and power bar
+if(charging){ctx.strokeStyle='#d8ff69';ctx.lineWidth=3;ctx.beginPath();ctx.arc(player.x,player.y-28,10,-Math.PI/2,-Math.PI/2+Math.PI*2*Math.min(1,charge/1.5));ctx.stroke();roundRect(150,520,160,8,4,'#ffffff2b');roundRect(150,520,160*Math.min(1,charge/1.5),8,4,'#d8ff69');ctx.fillStyle='#eaffb5';ctx.font='10px DM Mono,monospace';ctx.fillText(charge>1.3?'MAX POWER':'CHARGING SHOT',150,514)}
+// sparkly goals
+for(const p of particles){ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=p.c;ctx.fillRect(p.x,p.y,4,4)}ctx.globalAlpha=1;
+if(goalFlash){ctx.fillStyle=`rgba(216,255,105,${goalFlash*.16})`;ctx.fillRect(0,0,W,H)}
+// guide on gameplay
+if(state==='playing'){ctx.fillStyle='#d5eee0';ctx.globalAlpha=.66;ctx.font='10px DM Mono,monospace';ctx.fillText('AURORA PARK  ·  STORM LEVEL',51,195);ctx.fillText('GOAL',904,292);ctx.globalAlpha=1}
+}
+function drawPlayer(x,y,color,mark,small){ctx.save();ctx.translate(x,y);ctx.fillStyle='#001a18aa';ctx.beginPath();ctx.ellipse(0,12,small?14:16,6,0,0,Math.PI*2);ctx.fill();ctx.fillStyle=color;ctx.beginPath();ctx.arc(0,0,small?13:16,0,Math.PI*2);ctx.fill();ctx.fillStyle='#072a2b';ctx.beginPath();ctx.arc(0,-2,small?7:9,0,Math.PI*2);ctx.fill();if(mark){ctx.fillStyle='#fff9e8';ctx.font=`${small?10:12}px sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(mark,0,-1)}else{ctx.fillStyle='#fff4c4';ctx.beginPath();ctx.arc(2,-3,2,0,Math.PI*2);ctx.fill()}ctx.restore()}
+function frame(t){const dt=Math.min(.033,(t-last)/1000||0);last=t;update(dt);draw();requestAnimationFrame(frame)}requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
