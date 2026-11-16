@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#171715" />
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <title>IRON DUST — Sobreviva à tempestade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main id="game-shell">
+    <canvas id="world" aria-label="Arena de sobrevivência em 3D"></canvas>
+    <div class="film-grain"></div>
+    <div class="screen-vignette"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Iron Dust início"><span class="brand-mark">ID<span>·</span></span><span class="brand-name">IRON<br><b>DUST</b></span></a>
+      <div class="top-center"><span class="season-tag"><i></i> OPERAÇÃO 04</span><span class="top-divider"></span><span class="sector-label">SETOR DAS CINZAS <b>04 / 09</b></span></div>
+      <div class="resource-chip"><span class="resource-icon">✳</span><span id="iron-total">000</span><small>FERRO</small><button class="sound-toggle" id="sound-toggle" aria-label="Alternar áudio">◖))</button></div>
+    </header>
+
+    <section class="screen home-screen active" id="home-screen">
+      <div class="home-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> REGISTRO DE SOBREVIVENTE <span class="eyebrow-id">Nº 00841</span></div>
+        <h1>O DESERTO<br><span>NÃO PERDOA.</span></h1>
+        <p>Uma última rota. Uma horda inteira no seu retrovisor.<br>Quanto tempo você aguenta?</p>
+        <div class="home-actions"><button class="primary-btn" id="play-btn"><span>INICIAR PARTIDA</span><b>↗</b></button><button class="garage-shortcut" id="garage-shortcut"><span class="garage-icon">⚙</span><span>GARAGEM<small>PREPARE SEU VEÍCULO</small></span><b>→</b></button></div>
+        <div class="home-foot"><span>◆ SOBREVIVA ATÉ O FIM</span><span>10:00 MIN · CHEFE FINAL</span></div>
+      </div>
+      <div class="hero-caption"><span>VEÍCULO DE RECONHECIMENTO</span><b>AR-01 / “FERRUGEM”</b><i>01 — 05</i></div>
+      <div class="side-stats"><span>CONDIÇÕES</span><b>VENTOS DE AREIA</b><i>VISIBILIDADE 62%</i><div class="stat-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="dim"></i><i class="dim"></i></div></div>
+      <div class="map-preview"><div class="map-ring"></div><span>MAPA ATIVO</span><b>MAR DE SUCATA</b><i>▶</i></div>
+      <div class="garage-panel" id="garage-panel">
+        <button class="close-btn" id="garage-close" aria-label="Fechar garagem">×</button>
+        <div class="panel-kicker">OFICINA DE CAMPO / 04</div><h2>GARAGEM</h2><p class="panel-sub">A estrada não espera. Escolha bem.</p>
+        <div class="vehicle-list" id="vehicle-list"></div>
+        <div class="vehicle-detail" id="vehicle-detail"></div>
+        <div class="garage-upgrades"><div class="upgrade-head"><span>MELHORIAS PERMANENTES</span><small>FERRO: <b id="garage-iron">0</b></small></div><div class="upgrade-list" id="upgrade-list"></div></div>
+        <button class="primary-btn garage-deploy" id="deploy-btn"><span>PARTIR PARA A ESTRADA</span><b>↗</b></button>
+      </div>
+    </section>
+
+    <section class="screen game-screen" id="game-screen">
+      <div class="hud-top"><div class="mission-card"><span class="live-dot"></span><div><small>OPERAÇÃO EM CURSO</small><b id="map-name">MAR DE SUCATA</b></div></div><div class="run-clock"><small>TEMPO DE SOBREVIVÊNCIA</small><b id="clock">00:00</b></div><div class="wave-card"><span>ONDA</span><b id="wave">01</b><i id="wave-type">PATRULHA</i></div></div>
+      <div class="boss-bar hidden" id="boss-bar"><div class="boss-title"><span>AMEAÇA DE ALTO RISCO</span><b id="boss-name">O COLOSSO</b></div><div class="boss-track"><i id="boss-health"></i></div></div>
+      <div class="status-left"><div class="health-wrap"><div class="meter-label"><span>BLINDAGEM</span><b id="health-text">100</b></div><div class="meter-track"><i id="health-fill"></i><span></span></div></div><div class="xp-wrap"><div class="meter-label"><span>NÍVEL <b id="level">01</b></span><b id="xp-text">0 / 100</b></div><div class="meter-track xp-track"><i id="xp-fill"></i></div></div><div class="weapon-strip" id="weapon-strip"></div></div>
+      <div class="threat-indicators" id="threat-indicators"></div>
+      <div class="pickup-toast" id="pickup-toast">+1 FERRO</div>
+      <div class="tutorial-card hidden" id="tutorial-card"><span class="tutorial-count">01 <i>/ 04</i></span><b id="tutorial-title">ENCONTRE SEU RITMO</b><p id="tutorial-copy">Use WASD ou o analógico para dirigir.</p><div class="tutorial-arrow">↑</div><button id="tutorial-skip">PULAR TUTORIAL ↗</button></div>
+      <div class="mobile-controls" id="mobile-controls"><div class="joystick-zone" id="joystick-zone"><div class="joystick-base"><div class="joystick-knob" id="joystick-knob"></div></div></div><div class="mobile-actions"><button class="touch-action drift-action" id="drift-btn"><span>〰</span>DRIFT</button><button class="touch-action special-action" id="special-btn"><span>✦</span><i>HABILIDADE</i></button></div></div>
+      <div class="game-pause-row"><span>WASD / SETAS <i>DIRIGIR</i></span><span>ESPAÇO <i>DRIFT</i></span><span>SHIFT <i>HABILIDADE</i></span><button id="pause-btn" aria-label="Pausar">Ⅱ</button></div>
+    </section>
+
+    <section class="screen pause-screen" id="pause-screen"><div class="modal-card pause-card"><div class="panel-kicker">OPERAÇÃO SUSPENSA</div><h2>RECUPERE<br><span>O FÔLEGO.</span></h2><p>O deserto continua esperando.</p><button class="primary-btn" id="resume-btn"><span>VOLTAR À ESTRADA</span><b>↗</b></button><button class="text-btn" id="quit-btn">ABANDONAR OPERAÇÃO</button></div></section>
+    <section class="screen level-screen" id="level-screen"><div class="level-heading"><span class="panel-kicker">SUCATA CONVERTIDA EM EXPERIÊNCIA</span><h2>ESCOLHA SEU <span>PRÓXIMO PASSO.</span></h2><p>A horda não vai esperar. Escolha uma melhoria.</p></div><div class="upgrade-cards" id="upgrade-cards"></div></section>
+    <section class="screen result-screen" id="result-screen"><div class="result-card"><div class="panel-kicker">REGISTRO DE COMBATE / ARQUIVADO</div><div class="result-mark">✳</div><h2 id="result-title">A ESTRADA<br><span>CONTINUA.</span></h2><p id="result-copy">Você deixou sua marca no deserto.</p><div class="result-stats"><div><small>TEMPO</small><b id="result-time">00:00</b></div><div><small>ELIMINADOS</small><b id="result-kills">000</b></div><div><small>NÍVEL</small><b id="result-level">01</b></div><div><small>FERRO COLETADO</small><b id="result-iron">+00</b></div></div><button class="primary-btn" id="result-garage"><span>VOLTAR À GARAGEM</span><b>↗</b></button></div></section>
+    <div class="toast" id="toast"></div>
+    <footer class="bottom-mark"><span>IRON DUST</span><i>FEITO PARA QUEM NÃO PARA</i><span>0.4.1 <b>●</b></span></footer>
+  </main>
+  <script type="module" src="./game.js"></script>
+</body>
+</html>
