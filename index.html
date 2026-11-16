@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#07111e" />
+  <title>Turbo Takedown — Rocket Rally</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game-shell">
+    <canvas id="game-canvas"></canvas>
+    <div class="vignette"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Turbo Takedown home"><span class="brand-mark">✦</span><span>TURBO<span class="brand-light">TAKEDOWN</span></span></a>
+      <div class="match-pill"><span class="live-dot"></span> EXHIBITION MATCH</div>
+      <button class="icon-btn" id="sound-btn" title="Toggle sound" aria-label="Toggle sound">♫</button>
+    </header>
+    <section class="scoreboard" aria-label="Match score">
+      <div class="team blue-team"><span class="team-icon">◆</span><span class="team-name">NEON RIDERS</span></div>
+      <div class="score-center"><span id="blue-score">0</span><span class="score-dash">:</span><span id="orange-score">0</span></div>
+      <div class="team orange-team"><span class="team-name">PYRO PANTHERS</span><span class="team-icon">▲</span></div>
+      <div class="timer" id="timer">2:00</div>
+    </section>
+    <div class="toast" id="toast"></div>
+    <div class="goal-flash" id="goal-flash"><div class="goal-word">GOAL!</div><div class="goal-sub">WHAT A SHOT</div></div>
+    <aside class="left-hud">
+      <div class="item-card" id="item-card"><div class="item-orbit">?</div><div class="item-copy"><small>ITEM READY</small><strong id="item-name">NO ITEM</strong></div><kbd>Q</kbd></div>
+      <div class="pickup-hint" id="pickup-hint">DRIVE THROUGH A CRATE <span>▣</span></div>
+    </aside>
+    <aside class="right-hud">
+      <div class="speed-wrap"><div class="speed-number" id="speed">000</div><div class="speed-label">KM/H</div></div>
+      <div class="boost-meter"><div class="boost-meta"><span>BOOST</span><span id="boost-value">100</span></div><div class="boost-track"><div id="boost-fill"></div><i></i><i></i><i></i><i></i></div></div>
+    </aside>
+    <div class="controls-note"><span>WASD</span> DRIVE <b>·</b> <span>SPACE</span> JUMP <b>·</b> <span>SHIFT</span> BOOST <b>·</b> <span>Q</span> USE ITEM</div>
+    <div class="touch-controls" aria-label="Touch driving controls">
+      <div class="touch-steer"><button data-control="left">◀</button><button data-control="right">▶</button></div>
+      <div class="touch-actions"><button data-control="boost" class="touch-boost">BOOST</button><button data-control="jump" class="touch-jump">JUMP</button><button data-control="item" class="touch-item">ITEM</button></div>
+      <div class="touch-pedals"><button data-control="forward">▲</button><button data-control="back">▼</button></div>
+    </div>
+    <div class="overlay" id="start-overlay">
+      <div class="menu-card">
+        <div class="eyebrow"><span></span> THE ARENA IS YOURS</div>
+        <h1>SOCCER.<br><em>WITH TURBO.</em></h1>
+        <p>Smash the ball. Find the item crates.<br>Make the other team eat your dust.</p>
+        <button id="play-btn" class="play-btn"><span>KICK OFF</span><b>↗</b></button>
+        <div class="menu-foot"><span>⌨ KEYBOARD</span><span>◉ TOUCH READY</span></div>
+      </div>
+      <div class="menu-decoration deco-one">TURBO<br>TAKEDOWN</div><div class="menu-decoration deco-two">01 / 01</div>
+    </div>
+    <div class="overlay hidden" id="end-overlay">
+      <div class="menu-card end-card"><div class="eyebrow"><span></span> FINAL WHISTLE</div><h1 id="result-title">NICE<br><em>DRIVING.</em></h1><p id="result-copy">The arena is calling you back.</p><button id="rematch-btn" class="play-btn"><span>RUN IT BACK</span><b>↗</b></button></div>
+    </div>
+    <div class="crosshair"><i></i></div>
+    <div class="corner-label">ROCKET RALLY <span>•</span> FIELD 01</div>
+  </div>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
