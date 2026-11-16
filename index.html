@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#07141b" />
+  <title>SKYBOUND — Simulador de voo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="game">
+    <canvas id="scene" aria-label="Simulador de voo 3D"></canvas>
+    <div class="vignette"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Skybound início"><span class="brand-mark">✦</span><span>SKYBOUND<small>FLIGHT SIMULATOR</small></span></a>
+      <div class="flight-tag"><i></i> SIMULAÇÃO AO VIVO <span class="divider"></span> CESSNA 172</div>
+      <button id="pause-btn" class="icon-btn" aria-label="Pausar simulação">Ⅱ</button>
+    </header>
+    <section class="mission-card glass">
+      <div class="eyebrow"><span class="eyebrow-line"></span> MISSÃO 01 <span class="muted">/ VOO LIVRE</span></div>
+      <h1>Aprenda a voar.</h1>
+      <p>Decole da pista, explore o horizonte e volte para pousar com segurança.</p>
+      <div class="mission-steps">
+        <div class="step active" id="step-takeoff"><span class="step-icon">↗</span><span><b>Decolar</b><small>Ganhe velocidade e suba</small></span><i>01</i></div>
+        <div class="step" id="step-cruise"><span class="step-icon">◉</span><span><b>Voo nivelado</b><small>Estabilize acima de 250 m</small></span><i>02</i></div>
+        <div class="step" id="step-land"><span class="step-icon">⌁</span><span><b>Pousar</b><small>Retorne à pista de origem</small></span><i>03</i></div>
+      </div>
+      <div class="mission-progress"><div><span>PROGRESSO DA MISSÃO</span><b id="progress-label">0 / 3</b></div><div class="progress-track"><i id="progress-bar"></i></div></div>
+    </section>
+    <section class="status-pills"><div class="glass status"><span class="pulse"></span><span id="status-text">PRONTO PARA DECOLAR</span></div><div class="glass status"><span class="sun-icon">☼</span><span>VFR <b>·</b> VENTO 04 KT</span></div></section>
+    <section class="instrument-panel glass">
+      <div class="panel-title"><span>INSTRUMENTOS DE VOO</span><span class="live-dot">● AO VIVO</span></div>
+      <div class="instruments">
+        <div class="instrument"><div class="instrument-label">VELOCIDADE <small>IAS</small></div><div class="dial"><div class="dial-face"><span class="ticks">60　90　120　150　180</span><b id="speed-value">000</b><small>KT</small><i class="needle" id="speed-needle"></i></div></div></div>
+        <div class="instrument"><div class="instrument-label">ALTITUDE <small>ALT</small></div><div class="alt-box"><b id="alt-value">0000</b><small>FT</small><div class="alt-tape"><i id="alt-tape-fill"></i></div></div></div>
+        <div class="instrument"><div class="instrument-label">ATITUDE <small>AI</small></div><div class="attitude"><div class="attitude-sky" id="att-sky"><div class="att-horizon"></div><span>▰</span></div><div class="att-ring">＋</div></div></div>
+        <div class="instrument"><div class="instrument-label">MOTOR <small>RPM</small></div><div class="engine-box"><div class="engine-number"><b id="rpm-value">0850</b><small>RPM</small></div><div class="rpm-bar"><i id="rpm-bar"></i></div><div class="engine-minmax"><span>IDLE</span><span>MAX</span></div></div></div>
+      </div>
+      <div class="panel-bottom"><span>HDG <b id="heading-value">000°</b></span><span>V/S <b id="vs-value">+000</b> FPM</span><span>FLAPS <b id="flap-value">0°</b></span><span>GEAR <b>DOWN</b></span></div>
+    </section>
+    <section class="controls-card glass"><div class="panel-title">CONTROLES</div><div class="keys"><span><b>W</b><b>S</b><small>ARF / CABR</small></span><span><b>A</b><b>D</b><small>ROLAGEM</small></span><span><b>Q</b><b>E</b><small>LEME</small></span><span><b>SHIFT</b><small>POTÊNCIA</small></span></div><div class="mouse-hint">⌖ Arraste para olhar ao redor</div></section>
+    <div class="flight-hint glass" id="hint"><span class="hint-symbol">↑</span><span><b>PRONTO PARA DECOLAR</b><small>Aumente a potência para iniciar sua jornada</small></span><button id="hint-close" aria-label="Fechar dica">×</button></div>
+    <div class="touch-controls" aria-label="Controles de voo">
+      <div class="touch-cluster"><button data-control="left">◀</button><button data-control="up">▲</button><button data-control="down">▼</button><button data-control="right">▶</button></div>
+      <div class="touch-cluster right"><button data-control="power">THR +</button><button data-control="brake">BRAKE</button></div>
+    </div>
+    <div id="start-overlay" class="overlay"><div class="start-card glass"><div class="start-emblem">✦</div><div class="eyebrow">AERÓDROMO SERRA AZUL <span class="muted">· 06:42 AM</span></div><h2>O céu é seu.</h2><p>Seu Cessna está pronto na pista. Ajuste os controles, aumente a potência e sinta o voo.</p><div class="start-facts"><span><small>AERONAVE</small><b>Cessna 172</b></span><span><small>CONDIÇÕES</small><b>Vento calmo · Céu limpo</b></span></div><button id="start-btn" class="primary-btn">INICIAR VOO <span>↗</span></button><div class="start-foot">TECLADO OU TOQUE · SEM PRESSA, PILOTO</div></div></div>
+    <div id="toast" class="toast"></div>
+    <div class="crosshair"><i></i><b></b><i></i></div>
+  </main>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
